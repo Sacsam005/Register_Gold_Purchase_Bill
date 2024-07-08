@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= locals.title %></title>
+    </head>
+
+    <body>
+        <div class="p-1">
+                <h1 class="fw-bold"><%= locals.title %></h1>
+                <p><%= locals.description %></p>
+        </div>
+
+        <div
+            class="p-2 d-flex justify-content-center align-items-center flex-column"
+        >
+                    <a class="btn btn-warning rounded-0" href="/verify-user"><i class="fa fa-user" aria-hidden="true"></i> Verify with your credentials</a>
+                    <a class="btn btn-warning rounded-0 mt-2" href="verify-id"><i class="fa fa-clipboard" aria-hidden="true"></i> Verify with your bill id</a>
+            </ul>
+        </div>
+
+    </body>
+</html>

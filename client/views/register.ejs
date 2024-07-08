@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= locals.title %></title>
+    </head>
+    <body>
+        <div class="p-1">
+            <h1 class="fw-bold"><%= locals.title %></h1>
+            <p><%= locals.description %></p>
+        </div>
+
+        <% if (typeof warning !== "undefined") { %>
+        <p class="fw-bolder text-danger mb-0 px-1"><%= warning %></p>
+        <% } %>
+
+        <form action="/submit" method="POST" class="p-1">
+            <div class="owner_details">
+                <h5 class="fw-bolder text-primary">Owner details:</h5>
+
+                <div class="d-flex flex-column fw-bolder">
+                    <label for="firstName">First name:</label>
+                    <div
+                        class="d-flex align-items-center p-1 bg-light input_box"
+                    >
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input
+                            id="firstName"
+                            type="text"
+                            placeholder="First Name *"
+                            name="firstName"
+                            value="<%= formData ? formData.firstName : '' %>"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column fw-bolder">
+                    <label for="middleName">Middle Name:</label>
+                    <div
+                        class="d-flex align-items-center p-1 bg-light input_box"
+                    >
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input
+                            id="middleName"
+                            type="text"
+                            placeholder="Middle Name"
+                            name="middleName"
+                            value="<%= formData ? formData.middleName : '' %>"
+                        />
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column fw-bolder">
+                    <label for="lastName">Last Name:</label>
+                    <div
+                        class="d-flex align-items-center p-1 bg-light input_box"
+                    >
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input
+                            id="lastName"
+                            type="text"
+                            placeholder="Last Name *"
+                            name="lastName"
+                            value="<%= formData ? formData.lastName : '' %>"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column fw-bolder">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <% if (typeof errorMessage !== "undefined") { %>
+                    <p class="text-danger mb-0"><%= errorMessage %></p>
+                    <% } %>
+
+                    <div
+                        class="d-flex align-items-center p-1 bg-light input_box"
+                    >
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        <input
+                            id="phoneNumber"
+                            type="text"
+                            inputmode="numeric"
+                            placeholder="XXX-XXX-XXXX *"
+                            value="<%= formData ? formData.phoneNumber : '' %>"
+                            name="phoneNumber"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column fw-bolder">
+                    <label for="city">City:</label>
+                    <div
+                        class="d-flex align-items-center p-1 bg-light input_box"
+                    >
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <input
+                            id="city"
+                            type="text"
+                            placeholder="City *"
+                            name="city"
+                            value="<%= formData ? formData.city : '' %>"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column fw-bolder">
+                    <label for="province">Province:</label>
+                    <div
+                        class="d-flex align-items-center p-1 bg-light input_box"
+                    >
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <input
+                            id="province"
+                            type="text"
+                            placeholder="Province *"
+                            name="province"
+                            value="<%= formData ? formData.province : '' %>"
+                            required
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="item_details__container">
+                <h5 class="fw-bolder text-primary">Item details:</h5>
+
+                <div class="item_details">
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="purchasedDate">Date of purchase:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <input
+                                id="purchasedDate"
+                                type="date"
+                                placeholder="Date of purchase *"
+                                name="purchasedDate"
+                                value="<%= formData ? formData.purchasedDate : '' %>"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="vouchedDate">Date of record:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <input
+                                id="vouchedDate"
+                                type="date"
+                                placeholder="Date of vouch *"
+                                name="vouchedDate"
+                                value="<%= formData ? formData.vouchedDate : '' %>"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="itemName">Item name:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <input
+                                id="itemName"
+                                type="text"
+                                placeholder="Item name (Ring, Bracelet, Chain, Necklace) *"
+                                name="itemName"
+                                value="<%= formData ? formData.itemName : '' %>"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="tola">Quantity:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <input
+                                id="tola"
+                                class="mx-0 tola"
+                                type="text"
+                                inputmode="numeric"
+                                placeholder="Quantity in tola *"
+                                name="tola"
+                                value="<%= formData ? formData.tola : '' %>"
+                                required
+                            />
+                            <span class="m-0 px-2 py-1 bg-secondary text-light"
+                                >Tola</span
+                            >
+                        </div>
+                    </div>
+
+                    <div
+                        class="d-flex align-items-center fw-bolder p-1 bg-light input_box"
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <input
+                            class="mx-0 aana"
+                            type="text"
+                            inputmode="numeric"
+                            name="aana"
+                            placeholder="Quantity in aana *"
+                            value="<%= formData ? formData.aana : '' %>"
+                            required
+                        />
+                        <span class="m-0 px-2 py-1 bg-secondary text-light"
+                            >Aana</span
+                        >
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="rate">Rate:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                            <input
+                                id="rate"
+                                type="text"
+                                inputmode="numeric"
+                                placeholder="Rate per Tola (Current rate: NRS 1,21,915) *"
+                                name="rate"
+                                value="<%= formData ? formData.rate : '' %>"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="totalBeforeTax">Total Before tax:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <input
+                                id="totalBeforeTax"
+                                type="text"
+                                inputmode="numeric"
+                                placeholder="Total Before tax *"
+                                name="totalBeforeTax"
+                                value="<%= formData ? formData.totalBeforeTax : '' %>"
+                                readonly
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="tax">Tax:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                            <input
+                                id="tax"
+                                type="text"
+                                inputmode="numeric"
+                                placeholder="Tax *"
+                                name="tax"
+                                value="<%= formData ? formData.tax : '' %>"
+                                readonly
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="totalAfterTax">Total After Tax:</label>
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <input
+                                id="totalAfterTax"
+                                type="text"
+                                inputmode="number"
+                                placeholder="Total After Tax *"
+                                name="totalAfterTax"
+                                value="<%= formData ? formData.totalAfterTax : '' %>"
+                                readonly
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input
+                class="btn btn-primary rounded-0 mt-1"
+                type="submit"
+                value="Register"
+            />
+        </form>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.querySelector("form");
+                const purchasedDate = document.querySelector("#purchasedDate");
+                const vouchedDate = document.querySelector("#vouchedDate");
+                const itemRate = document.querySelector("[name='rate']");
+                const tola = document.querySelector(".tola");
+                const aana = document.querySelector(".aana");
+                const tax = document.querySelector("[name='tax']");
+                const totalBeforeTax = document.querySelector(
+                    "[name='totalBeforeTax']"
+                );
+                const totalAfterTax = document.querySelector(
+                    "[name='totalAfterTax']"
+                );
+                const phoneNumberInput = form.phoneNumber;
+
+                const STANDARD_GOLD_PRICE_PER_TOLA = 121915;
+                const TAX_RATE = 0.1;
+                const MAX_TOLA = 10;
+                const MAX_AANA = 160;
+                const todayDate = getFormattedDate();
+
+                purchasedDate.max = todayDate;
+                vouchedDate.min = todayDate;
+                vouchedDate.max = todayDate;
+
+                form.addEventListener("input", handleInput);
+                form.addEventListener("submit", handleSubmit);
+                phoneNumberInput.addEventListener(
+                    "input",
+                    handlePhoneNumberInput
+                );
+                phoneNumberInput.addEventListener(
+                    "keydown",
+                    restrictPhoneNumberLength
+                );
+                window.addEventListener("pageshow", clearFormOnBackNavigation);
+
+                function getFormattedDate() {
+                    const today = new Date();
+                    const year = today.getFullYear();
+                    const month = String(today.getMonth() + 1).padStart(2, "0");
+                    const day = String(today.getDate()).padStart(2, "0");
+                    return `${year}-${month}-${day}`;
+                }
+
+                function handleInput(event) {
+                    if (
+                        event.target === itemRate ||
+                        event.target === tola ||
+                        event.target === aana
+                    ) {
+                        calculateTotal();
+                    }
+                }
+
+                function handlePhoneNumberInput() {
+                    const phoneNumber = phoneNumberInput.value;
+
+                    if (phoneNumber.length > 10) {
+                        phoneNumberInput.value = phoneNumber.slice(0, 10);
+                    }
+                }
+
+                // Stop when phone numbers digits are more than 10
+                function restrictPhoneNumberLength(event) {
+                    const phoneNumber = phoneNumberInput.value;
+
+                    if (
+                        phoneNumber.length >= 10 &&
+                        ![8, 46].includes(event.keyCode)
+                    ) {
+                        event.preventDefault();
+                    }
+                }
+
+                function calculateTotal() {
+                    const rate = parseFloat(itemRate.value) || 0;
+                    const quantityInTola = parseFloat(tola.value) || 0;
+                    const quantityInAana = parseFloat(aana.value) || 0;
+
+                    const total =
+                        quantityInTola * rate + 0.0625 * quantityInAana * rate;
+                    const taxImposed = total * TAX_RATE;
+                    const grandTotal = total + taxImposed;
+
+                    totalBeforeTax.value = total.toFixed(2);
+                    tax.value = taxImposed.toFixed(2);
+                    totalAfterTax.value = grandTotal.toFixed(2);
+                }
+
+                function handleSubmit(event) {
+                    const phoneNumber = form.phoneNumber.value.trim();
+                    const purchasedDateValue = form.purchasedDate.value;
+                    const vouchedDateValue = form.vouchedDate.value;
+                    const rate = parseFloat(itemRate.value) || 0;
+                    const quantityInTola = parseFloat(tola.value) || 0;
+                    const quantityInAana = parseFloat(aana.value) || 0;
+
+                    if (phoneNumber.length !== 10) {
+                        event.preventDefault();
+                        alert("Phone number must be exactly 10 digits.");
+                        phoneNumberInput.focus();
+                        return;
+                    }
+
+                    if (isInvalidPhoneNumber(phoneNumber)) {
+                        event.preventDefault();
+                        return;
+                    }
+
+                    if (isInvalidGoldWeight(quantityInTola, quantityInAana)) {
+                        event.preventDefault();
+                        return;
+                    }
+
+                    if (purchasedDateValue > todayDate) {
+                        event.preventDefault();
+                        alert("Purchased date cannot be in the future.");
+                        purchasedDate.focus();
+                        return;
+                    }
+
+                    if (vouchedDateValue < todayDate) {
+                        event.preventDefault();
+                        alert("Vouched date cannot be in the past.");
+                        vouchedDate.focus();
+                        return;
+                    }
+
+                    if (rate.toString().length <= 4) {
+                        event.preventDefault();
+                        alert(
+                            `Item rate must be more than 4 digits. Standard gold price is ${STANDARD_GOLD_PRICE_PER_TOLA}.`
+                        );
+                        itemRate.focus();
+                        return;
+                    }
+
+                    enableFieldsBeforeSubmit();
+                }
+
+                function isInvalidPhoneNumber(phoneNumber) {
+                    return isNaN(phoneNumber) || phoneNumber.length !== 10;
+                }
+
+                function isInvalidGoldWeight(quantityInTola, quantityInAana) {
+                    if (quantityInTola > MAX_TOLA) {
+                        alert("Max quantity in tola is 10!");
+                        form.tola.value = "";
+                        return true;
+                    }
+                    if (quantityInAana > MAX_AANA) {
+                        alert("Max quantity in aana is 160!");
+                        form.aana.value = "";
+                        return true;
+                    }
+                    if (quantityInTola === 0 && quantityInAana === 0) {
+                        alert("Both quantity in tola and aana cannot be ZERO!");
+                        return true;
+                    }
+                    return false;
+                }
+
+                function enableFieldsBeforeSubmit() {
+                    totalBeforeTax.readOnly = false;
+                    tax.readOnly = false;
+                    totalAfterTax.readOnly = false;
+                }
+
+                function clearFormOnBackNavigation(event) {
+                    if (
+                        event.persisted ||
+                        (window.performance &&
+                            window.performance.navigation.type === 2)
+                    ) {
+                        form.reset();
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

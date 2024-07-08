@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= locals.title %></title>
+    </head>
+    <body>
+        <div class="p-1">
+            <h1 class="fw-bold"><%= locals.title %></h1>
+            <p><%= locals.description %></p>
+        </div>
+
+        <% if (typeof warning !== "undefined") { %>
+        <p class="fw-bolder text-danger mb-0 px-1"><%= warning %></p>
+        <% } %>
+
+        <form action="/transfer-success" method="post" class="p-1">
+            <div>
+                <h4 class="fw-bolder text-primary">Current Owner</h4>
+
+                <div class="owner_details">
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="firstName">First name:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <input
+                                id="firstName"
+                                type="text"
+                                placeholder="First Name *"
+                                value="<%= formData ? formData.firstName: ''%>"
+                                name="firstName"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="middleName">Middle Name:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <input
+                                id="middleName"
+                                type="text"
+                                placeholder="Middle Name"
+                                value="<%= formData ? formData.middleName: '' %>"
+                                name="middleName"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="lastName">Last Name:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-user" aria-hidden="true"></i>
+
+                            <input
+                                id="lastName"
+                                type="text"
+                                placeholder="Last Name *"
+                                value="<%= formData ? formData.lastName: ''%>"
+                                name="lastName"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="phoneNumber">Phone Number:</label>
+                        <% if (typeof errorMessage !== "undefined") { %>
+                        <p class="text-danger mb-0"><%= errorMessage %></p>
+                        <% } %>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <input
+                                id="phoneNumber"
+                                type="text"
+                                inputmode="numeric"
+                                placeholder="XXX-XXX-XXXX *"
+                                value="<%= formData ? formData.phoneNumber: '' %>"
+                                name="phoneNumber"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="billId">Your Bill ID:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                            <input
+                                id="billId"
+                                type="text"
+                                placeholder="Your Bill ID *"
+                                value="<%= formData ? formData.billId: ''%>"
+                                name="billId"
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <b
+                        ><i
+                            >If you don't have bill id, visit
+                            <a href="/verify-user">Verify with credentials</a>
+                            page, use your name and phone number to retrieve
+                            your bill information</i
+                        ></b
+                    >
+                </p>
+            </div>
+
+            <div>
+                <div>
+                    <h4 class="fw-bolder text-primary">New Owner</h4>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="newFirstName">First name:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <input
+                                id="newFirstName"
+                                type="text"
+                                placeholder="First Name *"
+                                value="<%= formData ? formData.newFirstName: '' %>"
+                                name="newFirstName"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="newMiddleName">Middle Name:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <input
+                                id="newMiddleName"
+                                type="text"
+                                placeholder="Middle Name"
+                                value="<%= formData ? formData.newMiddleName: '' %>"
+                                name="newMiddleName"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="newLastName">Last Name:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-user" aria-hidden="true"></i>
+
+                            <input
+                                id="newLastName"
+                                type="text"
+                                placeholder="Last Name *"
+                                value="<%= formData ? formData.newLastName: '' %>"
+                                name="newLastName"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="newPhoneNumber">Phone Number:</label>
+                        <% if (typeof newPhoneNumberError !== "undefined") { %>
+                        <p class="text-danger mb-0">
+                            <%= newPhoneNumberError %>
+                        </p>
+                        <% } %>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <input
+                                id="newPhoneNumber"
+                                type="text"
+                                inputmode="numeric"
+                                placeholder="XXX-XXX-XXXX *"
+                                value="<%= formData ? formData.newPhoneNumber: '' %>"
+                                name="newPhoneNumber"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="newCity">City:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <input
+                                id="newCity"
+                                type="text"
+                                placeholder="City *"
+                                value="<%= formData ? formData.newCity: '' %>"
+                                name="newCity"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column fw-bolder">
+                        <label for="newProvince">Province:</label>
+
+                        <div
+                            class="d-flex align-items-center p-1 bg-light input_box"
+                        >
+                            <i class="fa fa-home" aria-hidden="true"></i>
+
+                            <input
+                                id="newProvince"
+                                type="text"
+                                placeholder="Province *"
+                                value="<%= formData ?formData.newProvince: '' %>"
+                                name="newProvince"
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input
+                class="btn btn-success rounded-0 mt-1"
+                type="submit"
+                value="Transfer Ownership"
+            />
+        </form>
+
+        <script>
+            const form = document.querySelector("form");
+            const phoneNumberInput = form.phoneNumber;
+            const newPhoneNumberInput = form.newPhoneNumber;
+
+            phoneNumberInput.addEventListener("input", () =>
+                handlePhoneNumberInput(phoneNumberInput)
+            );
+            newPhoneNumberInput.addEventListener("input", () =>
+                handlePhoneNumberInput(newPhoneNumberInput)
+            );
+            phoneNumberInput.addEventListener("keydown", (event) =>
+                restrictPhoneNumberLength(event, phoneNumberInput)
+            );
+            newPhoneNumberInput.addEventListener("keydown", (event) =>
+                restrictPhoneNumberLength(event, newPhoneNumberInput)
+            );
+
+            function handlePhoneNumberInput(inputElement) {
+                const phoneNumber = inputElement.value;
+
+                if (phoneNumber.length > 10) {
+                    inputElement.value = phoneNumber.slice(0, 10);
+                }
+            }
+
+            // Stop when phone numbers digits are more than 10
+            function restrictPhoneNumberLength(event, inputElement) {
+                const phoneNumber = inputElement.value;
+
+                if (
+                    phoneNumber.length >= 10 &&
+                    ![8, 46].includes(event.keyCode)
+                ) {
+                    event.preventDefault();
+                }
+            }
+
+            form.addEventListener("submit", handleSubmit);
+
+            function handleSubmit(event) {
+                const phoneNumber = form.phoneNumber.value.trim();
+                const newPhoneNumber = form.newPhoneNumber.value.trim();
+
+                if (phoneNumber.length !== 10) {
+                    event.preventDefault();
+                    alert("Phone number must be exactly 10 digits.");
+                    form.phoneNumber.focus();
+                    return;
+                } else if (newPhoneNumber.length !== 10) {
+                    event.preventDefault();
+                    alert("Phone number must be exactly 10 digits.");
+                    form.newPhoneNumber.focus();
+                    return;
+                }
+
+                if (isInvalidPhoneNumber(phoneNumber)) {
+                    event.preventDefault();
+                    return;
+                } else if (isInvalidPhoneNumber(newPhoneNumber)) {
+                    event.preventDefault();
+                    return;
+                }
+            }
+
+            function isInvalidPhoneNumber(phoneNumber) {
+                return isNaN(phoneNumber) || phoneNumber.length !== 10;
+            }
+
+            window.addEventListener("pageshow", (event) => {
+                if (
+                    event.persisted ||
+                    (window.performance &&
+                        window.performance.navigation.type == 2)
+                ) {
+                    // Clear the form inputs when navigating back to the page
+                    form.reset();
+                }
+            });
+        </script>
+    </body>
+</html>

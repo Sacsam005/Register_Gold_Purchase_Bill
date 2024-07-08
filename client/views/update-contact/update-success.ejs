@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= locals.title %></title>
+    </head>
+    <body>
+        <div class="p-1">
+            <h1 class="fw-bold text-success"><%= locals.title %></h1>
+            <p><%= locals.description %></p>
+        </div>
+
+        <div class="owner_details">
+            <h5 class="fw-bolder text-primary">Owner details:</h5>
+
+            <div class="d-flex flex-column">
+                <p class="px-2">
+                    <b>First Name:</b>
+                    <%= formData.firstName %>
+                </p>
+                <p class="px-2">
+                    <b>Middle Name:</b>
+                    <%= formData.middleName || "N/A" %>
+                </p>
+                <p class="px-2">
+                    <b>Last Name:</b>
+                    <%= formData.lastName %>
+                </p>
+                <p class="px-2">
+                    <b>City:</b>
+                    <%= formData.city %>
+                </p>
+                <p class="px-2">
+                    <b>Province:</b>
+                    <%= formData.province %>
+                </p>
+                <p class="px-2">
+                    <b>Phone Number:</b>
+                    <%= formData.phoneNumber %>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

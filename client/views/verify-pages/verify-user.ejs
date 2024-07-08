@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= locals.title %></title>
+    </head>
+
+    <body>
+        <div class="p-1">
+            <h1 class="fw-bold"><%= locals.title %></h1>
+            <p><%= locals.description %></p>
+        </div>
+
+        <form action="/result" method="post">
+            <div class="d-flex flex-column fw-bolder">
+                <label for="firstName">First name:</label>
+
+                <div class="d-flex align-items-center p-1 bg-light input_box">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <input
+                        type="text"
+                        placeholder="First Name *"
+                        value="<%= formData ? formData.firstName : ''  %>"
+                        name="firstName"
+                        required
+                    />
+                </div>
+            </div>
+
+            <div class="d-flex flex-column fw-bolder">
+                <label for="middleName">Middle Name:</label>
+
+                <div class="d-flex align-items-center p-1 bg-light input_box">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <input
+                        type="text"
+                        placeholder="Middle Name"
+                        value="<%= formData ? formData.middleName : ''  %>"
+                        name="middleName"
+                    />
+                </div>
+            </div>
+
+            <div class="d-flex flex-column fw-bolder">
+                <label for="lastName">Last Name:</label>
+                <div class="d-flex align-items-center p-1 bg-light input_box">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Last Name *"
+                        value="<%= formData ? formData.lastName : ''  %>"
+                        name="lastName"
+                        required
+                    />
+                </div>
+            </div>
+
+            <div class="d-flex flex-column fw-bolder">
+                <label for="phoneNumber">Phone Number:</label>
+                <% if (typeof errorMessage !== "undefined") { %>
+                <p class="text-danger mb-0"><%= errorMessage %></p>
+                <% } %>
+
+                <div class="d-flex align-items-center p-1 bg-light input_box">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <input
+                        type="text"
+                        inputmode="numeric"
+                        placeholder="XXX-XXX-XXXX *"
+                        value="<%= formData ? formData.phoneNumber : ''  %>"
+                        name="phoneNumber"
+                        required
+                    />
+                </div>
+            </div>
+
+            <div class="submit">
+                <button class="px-3 py-1 m-1 btn btn-success rounded-0">
+                    Check
+                </button>
+            </div>
+        </form>
+
+        <script>
+            const form = document.querySelector("form");
+            const phoneNumberInput = form.phoneNumber;
+
+            phoneNumberInput.addEventListener("input", () =>
+                handlePhoneNumberInput(phoneNumberInput)
+            );
+            phoneNumberInput.addEventListener("keydown", (event) =>
+                restrictPhoneNumberLength(event, phoneNumberInput)
+            );
+
+            function handlePhoneNumberInput(inputElement) {
+                const phoneNumber = inputElement.value;
+
+                if (phoneNumber.length > 10) {
+                    inputElement.value = phoneNumber.slice(0, 10);
+                }
+            }
+
+            // Stop when phone numbers digits are more than 10
+            function restrictPhoneNumberLength(event, inputElement) {
+                const phoneNumber = inputElement.value;
+
+                if (
+                    phoneNumber.length >= 10 &&
+                    ![8, 46].includes(event.keyCode)
+                ) {
+                    event.preventDefault();
+                }
+            }
+
+            form.addEventListener("submit", handleSubmit);
+
+            function handleSubmit(event) {
+                const phoneNumber = form.phoneNumber.value.trim();
+
+                if (phoneNumber.length !== 10) {
+                    event.preventDefault();
+                    alert("Phone number must be exactly 10 digits.");
+                    form.phoneNumber.focus();
+                    return;
+                }
+
+                if (isInvalidPhoneNumber(phoneNumber)) {
+                    event.preventDefault();
+                    return;
+                }
+            }
+
+            function isInvalidPhoneNumber(phoneNumber) {
+                return isNaN(phoneNumber) || phoneNumber.length !== 10;
+            }
+
+            window.addEventListener("pageshow", (event) => {
+                if (
+                    event.persisted ||
+                    (window.performance &&
+                        window.performance.navigation.type == 2)
+                ) {
+                    // Clear the form inputs when navigating back to the page
+                    form.reset();
+                }
+            });
+        </script>
+    </body>
+</html>

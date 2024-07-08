@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= locals.title %></title>
+    </head>
+
+    <body>
+        <div
+            class="d-flex justify-content-center align-items-center text-center flex-column"
+        >
+            <h1 class="fw-bold"><%- locals.title %></h1>
+            <p><%- locals.description%></p>
+        </div>
+
+        <hr style="width: 90%; margin: 0 auto" />
+
+        <div class="m-2 p-2 text-center">
+            <h4 class="fw-bold">Traditional Approach</h4>
+            <p class="text-decoration-line-through text-danger">
+                Buy gold jewellery. Store the bill safely. Risk of losing the
+                bill.
+            </p>
+            <p>
+                If the bill is lost, the ownership of the jewellery may be
+                questioned, potentially leading to allegations of theft or
+                misappropriation. Consequently, this can result in a significant
+                loss of monetary value.
+            </p>
+        </div>
+
+        <div
+            class="p-2 d-flex justify-content-center align-items-center flex-column"
+        >
+            <h4 class="fw-bold">Modern Approach</h4>
+            <ul>
+                <li>Buy gold jewelry</li>
+                <li>Register your bill online</li>
+                <li>Securely store purchase details digitally</li>
+                <li>No need to worry about losing the physical bill</li>
+            </ul>
+        </div>
+
+        <hr style="width: 90%; margin: 0 auto" />
+
+        <div class="card p-2 m-3">
+            <p>
+                Have you recently purchased a gold jewellery and need to store
+                your purchase bill? Now, you can digitally store.
+            </p>
+            <a class="btn btn-primary rounded-0" href="/register"
+                >Register Your Bill</a
+            >
+        </div>
+
+        <div
+            class="cards_container p-2 d-flex justify-content-between align-items-stretch"
+        >
+            <div class="card p-2 mx-1">
+                <p>
+                    Looking to transfer ownership of a gold item you possess to
+                    someone else without actually selling it? Here's how you can
+                    do it.
+                </p>
+                <a class="btn btn-warning rounded-0" href="/transfer"
+                    >Transfer Ownership</a
+                >
+            </div>
+
+            <div class="card p-2 mx-1">
+                <p>
+                    Want to verify that the gold item you are about to purchase
+                    is not stolen or lost? Obtain the bill ID from the owner and
+                    verify it here.
+                </p>
+                <a class="btn btn-info rounded-0" href="/verify-page"
+                    >Verify Bill ID</a
+                >
+            </div>
+        </div>
+
+        <div class="card p-2 m-3">
+            <p>
+                If you have registered at least one bill using your phone
+                number, you can update your contact information here. Please
+                note that you must use the same phone number with which you
+                previously registered.
+            </p>
+            <a class="btn btn-secondary rounded-0" href="/update-prompt"
+                >Update Contact</a
+            >
+        </div>
+    </body>
+</html>
